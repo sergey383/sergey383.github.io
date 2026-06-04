@@ -270,6 +270,10 @@
   .cert-k8s { background: rgba(50,108,229,0.15); color: #326ce5; border: 1px solid rgba(50,108,229,0.3); }
   .cert-tf  { background: rgba(96,70,222,0.15); color: #844fba; border: 1px solid rgba(96,70,222,0.3); }
   .cert-az  { background: rgba(0,120,212,0.15); color: #0078d4; border: 1px solid rgba(0,120,212,0.3); }
+  .cert-db  { background: rgba(255,70,50,0.15); color: #ff6b4a; border: 1px solid rgba(255,70,50,0.3); }
+  .cert-oci { background: rgba(200,16,46,0.15); color: #e8314a; border: 1px solid rgba(200,16,46,0.3); }
+  .cert-ora { background: rgba(200,16,46,0.12); color: #c8102e; border: 1px solid rgba(200,16,46,0.28); }
+  .cert-dba { background: rgba(180,14,40,0.12); color: #b40e28; border: 1px solid rgba(180,14,40,0.28); }
 
   /* SKILLS */
   #skills {
@@ -280,15 +284,15 @@
 
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.25rem; margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem; margin-top: 3rem;
   }
   .skill-card {
     background: var(--surface);
     border: 1px solid var(--navy-border);
-    border-radius: 12px; padding: 1.75rem;
+    border-radius: 8px; padding: 1rem 1.1rem;
     backdrop-filter: blur(8px);
-    transition: border-color 0.25s, transform 0.25s, background 0.25s;
+    transition: border-color 0.25s, transform 0.2s, background 0.25s;
     position: relative; overflow: hidden;
   }
   .skill-card::before {
@@ -297,24 +301,27 @@
     transform: scaleX(0); transform-origin: left;
     transition: transform 0.3s ease;
   }
-  .skill-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-4px); background: var(--surface-hover); }
+  .skill-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-3px); background: var(--surface-hover); }
   .skill-card:hover::before { transform: scaleX(1); }
 
-  .skill-icon {
-    width: 40px; height: 40px; border-radius: 8px;
-    background: var(--electric-glow);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1rem; font-size: 1.2rem;
+  .skill-icon { display: none; }
+  .skill-card h3 {
+    font-size: 0.75rem; font-weight: 700; color: var(--electric-bright);
+    margin-bottom: 0.55rem; text-transform: uppercase; letter-spacing: 0.07em;
+    display: flex; align-items: center; gap: 6px;
   }
-  .skill-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
-  .tag-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-card h3::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--electric); flex-shrink: 0;
+  }
+  .tag-group { display: flex; flex-wrap: wrap; gap: 4px; }
   .tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem; letter-spacing: 0.04em;
-    padding: 4px 10px; border-radius: 4px;
+    font-size: 0.68rem; letter-spacing: 0.02em;
+    padding: 2px 8px; border-radius: 3px;
     background: rgba(59,130,246,0.08);
     color: var(--text-secondary);
-    border: 1px solid rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.13);
     transition: background 0.2s, color 0.2s;
   }
   .skill-card:hover .tag { background: rgba(59,130,246,0.14); color: var(--electric-bright); }
@@ -451,13 +458,74 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    #hero, #about, #experience, #skills .skills-inner, #projects .projects-inner, #contact { padding: 5rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero-stats { gap: 2rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+
+    nav { padding: 1rem 1.25rem; }
+    .nav-links {
+      display: none; flex-direction: column; gap: 0;
+      position: fixed; inset: 0; top: 57px;
+      background: rgba(10,22,40,0.98);
+      backdrop-filter: blur(20px);
+      padding: 2rem 1.5rem;
+      z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      padding: 1rem 0; font-size: 1.1rem;
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .hamburger {
+      display: flex; flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; height: 1.5px; background: var(--text-secondary);
+      border-radius: 2px; transition: all 0.25s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    #hero { padding: 6rem 1.25rem 4rem; min-height: auto; }
+    h1.hero-name { font-size: clamp(2.6rem, 12vw, 4rem); }
+    .hero-title { font-size: 0.9rem; }
+    .hero-desc { font-size: 0.95rem; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+    .scroll-hint { display: none; }
+
+    #about { padding: 4rem 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    h2.section-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+
+    #skills { padding: 4rem 0; }
+    .skills-inner { padding: 0 1.25rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+
+    #experience { padding: 4rem 1.25rem; }
+    .timeline-role { font-size: 1rem; }
+    .timeline-desc { font-size: 0.88rem; }
+
+    #projects { padding: 4rem 0; }
+    .projects-inner { padding: 0 1.25rem; }
+    .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+    #contact { padding: 4rem 1.25rem; }
+    .contact-links { flex-direction: column; align-items: stretch; }
+    .contact-link { justify-content: center; }
+
+    footer { padding: 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+
+    .orb { opacity: 0.18; }
   }
+
+  @media (max-width: 400px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  .hamburger { display: none; }
 </style>
 </head>
 <body>
@@ -475,13 +543,16 @@
     <span class="nav-logo-dot"></span>
     SE.DevOps
   </div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about" onclick="closeNav()">About</a>
+    <a href="#skills" onclick="closeNav()">Skills</a>
+    <a href="#experience" onclick="closeNav()">Experience</a>
+    <a href="#projects" onclick="closeNav()">Projects</a>
+    <a href="#contact" onclick="closeNav()">Contact</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -491,7 +562,7 @@
     Available for new opportunities
   </div>
   <h1 class="hero-name">
-    Hi, I'm <span class="name-highlight">Sergey</span>
+    Hi, I am <span class="name-highlight">Sergey</span>
   </h1>
   <p class="hero-title">
     Cloud &amp; DevOps Engineer &nbsp;<span>▸</span>&nbsp; Infrastructure · Automation · Reliability
@@ -503,24 +574,7 @@
     <a href="#projects" class="btn-primary">View Projects →</a>
     <a href="#contact" class="btn-outline">Get in Touch</a>
   </div>
-  <div class="hero-stats">
-    <div>
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Years Experience</div>
-    </div>
-    <div>
-      <div class="stat-num">40+</div>
-      <div class="stat-label">Projects Shipped</div>
-    </div>
-    <div>
-      <div class="stat-num">99.9%</div>
-      <div class="stat-label">SLO Target</div>
-    </div>
-    <div>
-      <div class="stat-num">3</div>
-      <div class="stat-label">Cloud Certs</div>
-    </div>
-  </div>
+
   <div class="scroll-hint">
     <div class="scroll-line"></div>
     scroll
@@ -539,12 +593,13 @@
     </div>
     <div>
       <div class="about-card">
-        <div class="about-card-label">Certifications</div>
+        <div class="about-card-label">Courses, Certifications &amp; Education</div>
         <ul class="cert-list">
-          <li class="cert-item"><span class="cert-badge cert-aws">AWS</span> AWS Solutions Architect Professional</li>
-          <li class="cert-item"><span class="cert-badge cert-k8s">CKA</span> Certified Kubernetes Administrator</li>
-          <li class="cert-item"><span class="cert-badge cert-tf">TF</span> HashiCorp Terraform Associate</li>
-          <li class="cert-item"><span class="cert-badge cert-az">AZ</span> Azure DevOps Engineer Expert</li>
+          <li class="cert-item"><span class="cert-badge cert-db">DB</span><div><div style="color:var(--text-primary);font-size:0.88rem;">Generative AI Fundamentals 2025</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Databricks</div></div></li>
+          <li class="cert-item"><span class="cert-badge cert-oci">OCI</span><div><div style="color:var(--text-primary);font-size:0.88rem;">OCI AI Foundations 2025</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
+          <li class="cert-item"><span class="cert-badge cert-oci">OCI</span><div><div style="color:var(--text-primary);font-size:0.88rem;">OCI Foundations 2022</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
+          <li class="cert-item"><span class="cert-badge cert-ora">ERP</span><div><div style="color:var(--text-primary);font-size:0.88rem;">ERP / Retail Apps 2015</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
+          <li class="cert-item"><span class="cert-badge cert-dba">DBA</span><div><div style="color:var(--text-primary);font-size:0.88rem;">Database Admin / Tuning 2008</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
         </ul>
       </div>
     </div>
@@ -554,56 +609,84 @@
 <!-- SKILLS -->
 <section id="skills">
   <div class="skills-inner">
-    <div class="section-label reveal">tech_stack</div>
-    <h2 class="section-title reveal">Skills & Techstack.</h2>
+    <div class="section-label reveal">key_skills</div>
+    <h2 class="section-title reveal">Key skills.</h2>
     <div class="skills-grid">
       <div class="skill-card reveal">
         <div class="skill-icon">☁️</div>
         <h3>Cloud Platforms</h3>
         <div class="tag-group">
-          <span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Azure</span>
-          <span class="tag">EC2</span><span class="tag">EKS</span><span class="tag">Lambda</span>
-          <span class="tag">CloudFront</span><span class="tag">Route53</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">⚙️</div>
-        <h3>Container & Orchestration</h3>
-        <div class="tag-group">
-          <span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Helm</span>
-          <span class="tag">Istio</span><span class="tag">ArgoCD</span><span class="tag">Flux</span>
+          <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Oracle OCI</span>
         </div>
       </div>
       <div class="skill-card reveal">
         <div class="skill-icon">🏗️</div>
-        <h3>Infrastructure as Code</h3>
+        <h3>IaC &amp; Config Mgmt</h3>
         <div class="tag-group">
-          <span class="tag">Terraform</span><span class="tag">Pulumi</span><span class="tag">Ansible</span>
-          <span class="tag">CloudFormation</span><span class="tag">CDK</span>
+          <span class="tag">Terraform</span><span class="tag">CloudFormation</span><span class="tag">Ansible</span><span class="tag">Helm</span>
         </div>
       </div>
       <div class="skill-card reveal">
         <div class="skill-icon">🔁</div>
-        <h3>CI/CD Pipelines</h3>
+        <h3>CI/CD</h3>
         <div class="tag-group">
-          <span class="tag">GitHub Actions</span><span class="tag">GitLab CI</span>
-          <span class="tag">Jenkins</span><span class="tag">CircleCI</span><span class="tag">Tekton</span>
+          <span class="tag">Jenkins</span><span class="tag">GitLab CI</span><span class="tag">Argo CD</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <h3>Containers &amp; Orchestration</h3>
+        <div class="tag-group">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">OpenShift</span>
         </div>
       </div>
       <div class="skill-card reveal">
         <div class="skill-icon">📡</div>
-        <h3>Observability</h3>
+        <h3>Monitoring &amp; Logging</h3>
         <div class="tag-group">
-          <span class="tag">Prometheus</span><span class="tag">Grafana</span>
-          <span class="tag">Datadog</span><span class="tag">OpenTelemetry</span><span class="tag">ELK</span>
+          <span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">ELK Stack</span><span class="tag">Datadog</span><span class="tag">Dynatrace</span><span class="tag">Splunk</span>
         </div>
       </div>
       <div class="skill-card reveal">
-        <div class="skill-icon">🔒</div>
-        <h3>Security & Compliance</h3>
+        <div class="skill-icon">💻</div>
+        <h3>Scripting</h3>
         <div class="tag-group">
-          <span class="tag">Vault</span><span class="tag">OPA</span><span class="tag">Trivy</span>
-          <span class="tag">Falco</span><span class="tag">SonarQube</span><span class="tag">Snyk</span>
+          <span class="tag">Bash</span><span class="tag">Python</span><span class="tag">PowerShell</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <h3>DevOps for AI/ML</h3>
+        <div class="tag-group">
+          <span class="tag">SageMaker</span><span class="tag">Airflow</span><span class="tag">N8N</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗂️</div>
+        <h3>Version Control</h3>
+        <div class="tag-group">
+          <span class="tag">GitHub</span><span class="tag">GitLab</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🖥️</div>
+        <h3>Operating Systems</h3>
+        <div class="tag-group">
+          <span class="tag">Ubuntu</span><span class="tag">CentOS</span><span class="tag">Windows Server</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <h3>Databases</h3>
+        <div class="tag-group">
+          <span class="tag">Oracle</span><span class="tag">MSSQL</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Elasticsearch</span><span class="tag">CouchDB</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <h3>Networking</h3>
+        <div class="tag-group">
+          <span class="tag">OpenVPN</span><span class="tag">WireGuard</span><span class="tag">DNS</span><span class="tag">Load Balancers</span><span class="tag">Proxies</span>
         </div>
       </div>
     </div>
@@ -653,28 +736,32 @@
     <div class="projects-grid">
       <div class="project-card reveal">
         <div class="project-header">
-          <div class="project-icon-wrap">🚀</div>
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
           <div class="project-links">
             <a class="project-link" href="#">GitHub ↗</a>
           </div>
         </div>
-        <h3>KubeForge Platform</h3>
-        <p>Internal developer platform providing self-service Kubernetes environments. Engineers provision fully networked, RBAC-secured namespaces in &lt;2 minutes via a web UI backed by a Terraform controller.</p>
+        <h3>Deploying a Production-Ready Kubernetes Cluster on AWS</h3>
+        <p>Automates the creation and management of a fully functional EKS cluster on AWS using Terraform — delivering a scalable, secure, and cloud-native IaC solution. Empowers DevOps and platform engineering teams with a repeatable, version-controlled method for deploying containerized applications in the cloud.</p>
         <div class="tag-group">
-          <span class="tag">Kubernetes</span><span class="tag">Go</span><span class="tag">Terraform</span><span class="tag">ArgoCD</span>
+          <span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span><span class="tag">Load Balancing</span>
         </div>
       </div>
       <div class="project-card reveal">
         <div class="project-header">
-          <div class="project-icon-wrap">📊</div>
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+          </div>
           <div class="project-links">
             <a class="project-link" href="#">GitHub ↗</a>
           </div>
         </div>
-        <h3>SLO Watchdog</h3>
-        <p>Open-source SLO tracking engine built on Prometheus. Automatically computes error budgets, fires burn-rate alerts, and generates weekly reliability reports posted to Slack with trend insights.</p>
+        <h3>Kubernetes Infrastructure for Airflow / Metabase app</h3>
+        <p>Created and managed a fully working Kubernetes cluster hosting Airflow and Metabase. Role: Cloud Engineer. Architected DNS zones, load balancers, PostgreSQL backends, SFTP service, PVC storage, Git-sync pipelines, and VPN access via GitLab and Rancher.</p>
         <div class="tag-group">
-          <span class="tag">Prometheus</span><span class="tag">Python</span><span class="tag">Grafana</span><span class="tag">Slack API</span>
+          <span class="tag">Kubernetes</span><span class="tag">Apache Airflow</span><span class="tag">Terraform</span><span class="tag">PostgreSQL</span><span class="tag">Metabase</span>
         </div>
       </div>
       <div class="project-card reveal">
@@ -717,10 +804,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Email Me
     </a>
-    <a class="contact-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      LinkedIn
-    </a>
+
     <a class="contact-link" href="#">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
       GitHub
@@ -734,11 +818,23 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy">© 2025 Alex Rivera &nbsp;·&nbsp; Built with precision &amp; caffeine</div>
+  <div class="footer-copy">© 2026 Sergey</div>
   <div class="footer-status"><span class="status-dot"></span> Open to work</div>
 </footer>
 
 <script>
+  // Hamburger menu
+  function toggleNav() {
+    const nav = document.getElementById('navLinks');
+    const btn = document.getElementById('hamburger');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
