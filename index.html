@@ -31,30 +31,11 @@
     background-color: var(--navy);
     color: var(--text-primary);
     overflow-x: hidden;
-    cursor: none;
+    cursor: auto;
   }
 
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--electric);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1.5px solid rgba(59,130,246,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: transform 0.15s ease, width 0.25s, height 0.25s, border-color 0.2s;
-  }
+  .cursor, .cursor-ring { display: none; }
+
 
   /* Grid background */
   body::before {
@@ -136,11 +117,11 @@
   .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 1.5s infinite; }
 
   h1.hero-name {
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 800;
+    font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+    font-weight: 700;
     line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    color: var(--text-secondary);
     animation: fadeUp 0.8s 0.1s ease both;
   }
   .name-highlight {
@@ -539,10 +520,9 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <span class="nav-logo-dot"></span>
-    SE.DevOps
-  </div>
+  <a href="#" class="nav-logo" style="text-decoration:none;background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+    SE
+  </a>
   <div class="nav-links" id="navLinks">
     <a href="#about" onclick="closeNav()">About</a>
     <a href="#skills" onclick="closeNav()">Skills</a>
@@ -562,7 +542,7 @@
     Available for new opportunities
   </div>
   <h1 class="hero-name">
-    Hi, I am <span class="name-highlight">Sergey</span>
+    <span style="color: var(--text-primary);">Hi, I am </span><span class="name-highlight">Sergey</span>
   </h1>
   <p class="hero-title">
     Cloud &amp; DevOps Engineer &nbsp;<span>▸</span>&nbsp; Infrastructure · Automation · Reliability
@@ -585,25 +565,11 @@
 <section id="about">
   <div class="section-label">about_me</div>
   <h2 class="section-title">Infrastructure<br/>is my craft.</h2>
-  <div class="about-grid reveal">
-    <div class="about-text">
+  <div class="about-text reveal">
       <p>I'm a Cloud &amp; DevOps Engineer with over 5 years of experience designing, building, and operating scalable infrastructure on AWS, Azure, and GCP. I specialize in Kubernetes orchestration, CI/CD pipeline design, and IaC with Terraform.</p>
       <p>My approach is platform-first: I build internal developer platforms that let engineering teams ship faster without sacrificing reliability or security. From zero-downtime deployments to automated compliance checks, I own the full lifecycle.</p>
-      <p>When I'm not automating things, I contribute to open-source tooling and write about observability, GitOps patterns, and SRE culture.</p>
+
     </div>
-    <div>
-      <div class="about-card">
-        <div class="about-card-label">Courses, Certifications &amp; Education</div>
-        <ul class="cert-list">
-          <li class="cert-item"><span class="cert-badge cert-db">DB</span><div><div style="color:var(--text-primary);font-size:0.88rem;">Generative AI Fundamentals 2025</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Databricks</div></div></li>
-          <li class="cert-item"><span class="cert-badge cert-oci">OCI</span><div><div style="color:var(--text-primary);font-size:0.88rem;">OCI AI Foundations 2025</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
-          <li class="cert-item"><span class="cert-badge cert-oci">OCI</span><div><div style="color:var(--text-primary);font-size:0.88rem;">OCI Foundations 2022</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
-          <li class="cert-item"><span class="cert-badge cert-ora">ERP</span><div><div style="color:var(--text-primary);font-size:0.88rem;">ERP / Retail Apps 2015</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
-          <li class="cert-item"><span class="cert-badge cert-dba">DBA</span><div><div style="color:var(--text-primary);font-size:0.88rem;">Database Admin / Tuning 2008</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:'DM Mono',monospace;">@ Oracle</div></div></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- SKILLS -->
@@ -736,9 +702,7 @@
     <div class="projects-grid">
       <div class="project-card reveal">
         <div class="project-header">
-          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
           <div class="project-links">
             <a class="project-link" href="#">GitHub ↗</a>
           </div>
@@ -751,9 +715,7 @@
       </div>
       <div class="project-card reveal">
         <div class="project-header">
-          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-          </div>
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
           <div class="project-links">
             <a class="project-link" href="#">GitHub ↗</a>
           </div>
@@ -766,7 +728,7 @@
       </div>
       <div class="project-card reveal">
         <div class="project-header">
-          <div class="project-icon-wrap">🔐</div>
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
           <div class="project-links">
             <a class="project-link" href="#">Blog ↗</a>
           </div>
@@ -779,15 +741,28 @@
       </div>
       <div class="project-card reveal">
         <div class="project-header">
-          <div class="project-icon-wrap">🌐</div>
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
           <div class="project-links">
-            <a class="project-link" href="#">Docs ↗</a>
+            <a class="project-link" href="#">GitHub ↗</a>
           </div>
         </div>
-        <h3>Multi-Region DR Runbook</h3>
-        <p>Automated disaster recovery orchestration with Route53 failover, RDS cross-region replicas, and chaos testing via AWS Fault Injection Simulator. Achieved RPO &lt;30s and RTO &lt;5 minutes.</p>
+        <h3>Decentralized Crowdfunding Platform on Ethereum</h3>
+        <p>A decentralized crowdfunding platform built on the Ethereum blockchain using Solidity smart contracts, with Coinbase Wallet integration for seamless and secure user interaction. Allows individuals or organizations to create fundraising campaigns and enables backers to contribute ETH trustlessly — funds are only transferred when predefined goals are met.</p>
         <div class="tag-group">
-          <span class="tag">AWS</span><span class="tag">Terraform</span><span class="tag">Route53</span><span class="tag">FIS</span>
+          <span class="tag">Terraform</span><span class="tag">AWS CloudFront</span><span class="tag">MySQL</span><span class="tag">AWS CloudTrail</span><span class="tag">AWS Lambda</span><span class="tag">Coinbase SDK</span><span class="tag">Ethereum Network</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-icon-wrap" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+          <div class="project-links">
+            <a class="project-link" href="#">GitHub ↗</a>
+          </div>
+        </div>
+        <h3>CI/CD Migration to GitLab</h3>
+        <p>Migrated CI/CD pipelines from GitHub and Azure DevOps to GitLab — consolidating workflows, standardizing pipeline definitions, and integrating secrets management with HashiCorp Vault across all environments.</p>
+        <div class="tag-group">
+          <span class="tag">GitLab</span><span class="tag">Azure DevOps</span><span class="tag">Ubuntu</span><span class="tag">Vault by HashiCorp</span><span class="tag">GitHub</span>
         </div>
       </div>
     </div>
@@ -800,19 +775,16 @@
   <h2 class="section-title reveal">Let's build something<br/>together.</h2>
   <p class="contact-tagline reveal">Whether it's a platform migration, SRE strategy, or open-source collaboration — I'd love to hear from you.</p>
   <div class="contact-links reveal">
-    <a class="contact-link" href="mailto:alex@example.com">
+    <a class="contact-link" href="mailto:wwwsergey@netscape.net">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Email Me
     </a>
 
-    <a class="contact-link" href="#">
+    <a class="contact-link" href="https://github.com/sergey383/" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
       GitHub
     </a>
-    <a class="contact-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      Resume
-    </a>
+
   </div>
 </section>
 
