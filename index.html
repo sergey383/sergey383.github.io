@@ -520,7 +520,11 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo" style="text-decoration:none;background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+  <a href="#" class="nav-logo" style="text-decoration:none;background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:6px;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="url(#homeGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="-webkit-text-fill-color:initial;">
+      <defs><linearGradient id="homeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
     SE
   </a>
   <div class="nav-links" id="navLinks">
@@ -665,30 +669,66 @@
   <h2 class="section-title reveal">Where I've worked.</h2>
   <div class="timeline reveal">
     <div class="timeline-item">
-      <div class="timeline-year">2022 — Present</div>
-      <div class="timeline-role">Senior Cloud & DevOps Engineer</div>
-      <div class="timeline-company">FinScale Technologies</div>
-      <p class="timeline-desc">Led migration of 200+ microservices to EKS, cutting infrastructure costs by 38%. Designed a GitOps platform with ArgoCD and Flux serving 80 engineers. Built self-service Kubernetes namespaces and automated compliance gates using OPA Gatekeeper.</p>
-      <div class="timeline-tags">
-        <span class="tag">EKS</span><span class="tag">ArgoCD</span><span class="tag">Terraform</span><span class="tag">OPA</span><span class="tag">Datadog</span>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-year">2020 — 2022</div>
+      <div class="timeline-year">2026 — Present</div>
       <div class="timeline-role">DevOps Engineer</div>
-      <div class="timeline-company">CloudNine Solutions</div>
-      <p class="timeline-desc">Built multi-region AWS infrastructure with Terraform for SaaS product serving 500k users. Reduced deployment time from 45 minutes to under 8 minutes through parallel pipeline stages and artifact caching. Implemented SLOs with error budgets and automated alerting.</p>
+      <div class="timeline-company">HCLTech — Canada</div>
+      <p class="timeline-desc">Designed and deployed microservices architecture using Kubernetes and Docker. Automated deployments with GitHub Actions and Helm charts. Configured auto-scaling and rolling updates for high availability.</p>
       <div class="timeline-tags">
-        <span class="tag">AWS</span><span class="tag">GitHub Actions</span><span class="tag">Prometheus</span><span class="tag">Helm</span>
+        <span class="tag">AKS</span><span class="tag">GitHub</span><span class="tag">Helm</span><span class="tag">Dynatrace</span>
       </div>
     </div>
     <div class="timeline-item">
-      <div class="timeline-year">2019 — 2020</div>
-      <div class="timeline-role">Systems Engineer</div>
-      <div class="timeline-company">DataBridge Corp</div>
-      <p class="timeline-desc">Containerized legacy workloads and introduced Docker Compose for local dev parity. Set up centralized logging with ELK stack and first CI pipeline using Jenkins, improving release cadence from monthly to weekly.</p>
+      <div class="timeline-year">2014 — 2026</div>
+      <div class="timeline-role">DevOps Engineer</div>
+      <div class="timeline-company">Rogers Communications — Canada</div>
+      <p class="timeline-desc">Managed and deployed applications in Azure cloud environments. Applied CI/CD, IaC, and Agile methodologies across engineering teams. Automated workflows using Shell scripting, PowerShell, and Python. Maintained monitoring and logging for complex distributed systems. Worked with databases, big data technologies, and data storage platforms. Independently handled critical and complex technical issues end-to-end.</p>
       <div class="timeline-tags">
-        <span class="tag">Docker</span><span class="tag">Jenkins</span><span class="tag">ELK</span><span class="tag">Ansible</span>
+        <span class="tag">Azure</span><span class="tag">CI/CD</span><span class="tag">IaC</span><span class="tag">PowerShell</span><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Agile</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025 — 2026</div>
+      <div class="timeline-role">Cloud &amp; DevOps Engineer <span style="color:var(--electric-bright);font-weight:500;">(Contract)</span></div>
+      <div class="timeline-company">Oeeintellisuite — US, Remote</div>
+      <p class="timeline-desc">Deployed GitLab CE on VM, implemented GitLab Container Registry, and configured automated backups. Migrated repositories from GitHub to GitLab and converted Azure DevOps YAML pipelines to GitLab CI/CD. Migrated secrets from Azure Key Vault to HCP Vault.</p>
+      <div class="timeline-tags">
+        <span class="tag">GitLab</span><span class="tag">Azure DevOps</span><span class="tag">HCP Vault</span><span class="tag">Docker</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023 — 2025</div>
+      <div class="timeline-role">Cloud &amp; DevOps Engineer <span style="color:var(--electric-bright);font-weight:500;">(Contract)</span></div>
+      <div class="timeline-company">Oneclickmedia — Australia, Remote</div>
+      <p class="timeline-desc">Provisioned and maintained multi-environment Kubernetes clusters (Dev, QA, Prod) in on-prem infrastructure. Built GitLab CI/CD pipelines for automated container builds, testing, and deployments. Containerized applications using Docker and optimized deployment strategies for scalability and resilience. Implemented infrastructure automation and environment consistency across the software delivery lifecycle.</p>
+      <div class="timeline-tags">
+        <span class="tag">Kubernetes</span><span class="tag">GitLab CI/CD</span><span class="tag">Docker</span><span class="tag">On-Prem</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022 — 2023</div>
+      <div class="timeline-role">Cloud &amp; DevOps Engineer <span style="color:var(--electric-bright);font-weight:500;">(Contract)</span></div>
+      <div class="timeline-company">Responsum AI — US, Remote</div>
+      <p class="timeline-desc">Deployed and maintained Rasa Open-Source conversational AI platform in production using Docker and Kubernetes (EKS), supporting multi-language chatbot applications at scale. Automated infrastructure provisioning with Terraform across AWS accounts including SageMaker and EKS. Optimized Rasa server performance with horizontal pod autoscaling, achieving 25% improvement in response latency under peak loads.</p>
+      <div class="timeline-tags">
+        <span class="tag">EKS</span><span class="tag">Docker</span><span class="tag">Terraform</span><span class="tag">SageMaker</span><span class="tag">Rasa</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022 — 2026</div>
+      <div class="timeline-role">Cloud &amp; DevOps Engineer <span style="color:var(--electric-bright);font-weight:500;">(Contract)</span></div>
+      <div class="timeline-company">North Side Hip Hop — Canada, Remote</div>
+      <p class="timeline-desc">Recommended cost-effective cloud solutions through system design and analysis. Guided teams on microservices (Kubernetes) and blockchain frameworks. Automated infrastructure with Terraform, cutting deployment time by 60%. Built CI/CD pipelines for web and mobile apps. Deployed Docker containers on AWS for scalable app management. Helped establish a Cloud Center of Excellence for CI/CD and automation best practices.</p>
+      <div class="timeline-tags">
+        <span class="tag">AWS</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Blockchain</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2006 — 2014</div>
+      <div class="timeline-role">Operations Analyst</div>
+      <div class="timeline-company">Rogers Communications — Canada</div>
+      <p class="timeline-desc">Analyzed data to identify trends and drive operational improvements. Partnered with teams to implement process enhancements. Managed multiple projects meeting deadlines through effective planning. Performed cost-benefit analyses on proposed changes. Created reports with strategic recommendations for leadership. Supported production systems to ensure performance and availability.</p>
+      <div class="timeline-tags">
+        <span class="tag">Operations</span><span class="tag">Data Analysis</span><span class="tag">Project Management</span><span class="tag">Reporting</span>
       </div>
     </div>
   </div>
